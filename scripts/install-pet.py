@@ -57,10 +57,9 @@ I18N_FILES = {
 }
 
 # Minimum extension version that requires PET.
-# Extensions older than this will be skipped.
-# Format: (major, minor, patch)  —  e.g. (2026, 4, 0)
-# TODO: confirm the exact version with upstream.
-MIN_PYTHON_EXT_VERSION = (2025, 1, 0)  # PLACEHOLDER — update after confirmation
+# Extensions ≤ this version will be skipped.
+# Reference: pet-deploy-tools/note.txt
+MIN_PYTHON_EXT_VERSION = (2024, 8, 1)
 
 # Extension directory candidates (ordered by priority)
 EXTENSION_SEARCH_PATHS = [
@@ -165,7 +164,7 @@ def is_extension_too_old(dir_name: str) -> bool:
     ver = parse_extension_version(dir_name)
     if ver is None:
         return False  # can't parse → don't skip
-    return ver < MIN_PYTHON_EXT_VERSION
+    return ver <= MIN_PYTHON_EXT_VERSION
 
 
 # ══════════════════════════════════════════════════════════════════════════
